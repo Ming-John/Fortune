@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #calculator {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #333;
+            border: 1px solid #555;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            position: relative;
+            animation: borderGlow 5s infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% {
+                border-color: #f00;
+                box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            }
+            10% {
+                border-color: #f80;
+                box-shadow: 0 0 10px rgba(255, 136, 0, 0.5);
+            }
+            20% {
+                border-color: #ff0;
+                box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+            }
+            30% {
+                border-color: #8f8;
+                box-shadow: 0 0 10px rgba(136, 255, 136, 0.5);
+            }
+            40% {
+                border-color: #0f0;
+                box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            }
+            50% {
+                border-color: #0f8;
+                box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            }
+            60% {
+                border-color: #0ff;
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            }
+            70% {
+                border-color: #08f;
+                box-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
+            }
+            80% {
+                border-color: #00f;
+                box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+            }
+            90% {
+                border-color: #80f;
+                box-shadow: 0 0 10px rgba(136, 0, 255, 0.5);
+            }
+            100% {
+                border-color: #f0f;
+                box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            }
+        }
+
+        input {
+            grid-column: span 4;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 24px;
+            text-align: right;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #555;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button.operator {
+            background-color: #f7921e;
+            color: #fff;
+        }
+
+        button.equals {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        button.digit {
+            background-color: #4285f4;
+            color: #fff;
+        }
+
+        button.clear {
+            background-color: #d32f2f;
+            color: #fff;
+        }
+
+        button.decimal {
+            background-color: #1976d2;
+            color: #fff;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        button:active {
+            background-color: #777;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #name {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            font-size: 12px;
+            animation: nameGlow 5s infinite alternate;
+        }
+
+        @keyframes nameGlow {
+            0% {
+                color: #f00;
+            }
+            10% {
+                color: #f80;
+            }
+            20% {
+                color: #ff0;
+            }
+            30% {
+                color: #8f8;
+            }
+            40% {
+                color: #0f0;
+            }
+            50% {
+                color: #0f8;
+            }
+            60% {
+                color: #0ff;
+            }
+            70% {
+                color: #08f;
+            }
+            80% {
+                color: #00f;
+            }
+            90% {
+                color: #80f;
+            }
+            100% {
+                color: #f0f;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="calculator">
+    <input type="text" id="display" readonly>
+
+    <button class="digit" onclick="appendToDisplay('7')">7</button>
+    <button class="digit" onclick="appendToDisplay('8')">8</button>
+    <button class="digit" onclick="appendToDisplay('9')">9</button>
+    <button class="operator" onclick="appendToDisplay('/')">/</button>
+
+    <button class="digit" onclick="appendToDisplay('4')">4</button>
+    <button class="digit" onclick="appendToDisplay('5')">5</button>
+    <button class="digit" onclick="appendToDisplay('6')">6</button>
+    <button class="operator" onclick="appendToDisplay('*')">*</button>
+
+    <button class="digit" onclick="appendToDisplay('1')">1</button>
+    <button class="digit" onclick="appendToDisplay('2')">2</button>
+    <button class="digit" onclick="appendToDisplay('3')">3</button>
+    <button class="operator" onclick="appendToDisplay('-')">-</button>
+
+    <button class="digit" onclick="appendToDisplay('0')">0</button>
+    <button class="decimal" onclick="appendToDisplay('.')">.</button>
+    <button class="equals" onclick="calculate()">=</button>
+    <button class="operator" onclick="appendToDisplay('+')">+</button>
+
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <div id="name">Fortune Isaac</div>
+</div>
+
+<script>
+    function appendToDisplay(value) {
+        document.getElementById('display').value += value;
+    }
+
+    function clearDisplay() {
+        document.getElementById('display').value = '';
+    }
+
+    function calculate() {
+        var displayValue = document.getElementById('display').value;
+        try {
+            document.getElementById('display').value = eval(displayValue);
+        } catch (error) {
+            document.getElementById('display').value = 'Error';
+        }
+    }
+</script>
+
+</body>
+</html>
